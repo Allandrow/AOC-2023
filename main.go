@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
 
 func logIfError(err error) {
@@ -16,5 +17,10 @@ func main() {
 	body, err := os.ReadFile("sample.txt")
 
 	logIfError(err)
-	fmt.Println(string(body))
+
+	lines := strings.Split(string(body), "\n")
+
+	for i, line := range lines {
+		fmt.Printf("%v: %v\n", i, line)
+	}
 }
