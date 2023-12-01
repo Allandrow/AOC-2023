@@ -1,11 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
+	"regexp"
+	"strconv"
 	"strings"
 )
+
+const REGEX = `(\d)(?:.*(\d))?`
 
 func logIfError(err error) {
 	if err != nil {
@@ -14,13 +17,21 @@ func logIfError(err error) {
 }
 
 func main() {
-	body, err := os.ReadFile("sample.txt")
-
+	r, _ := regexp.Compile(REGEX)
+	body, err := os.ReadFile("input.txt")
 	logIfError(err)
 
 	lines := strings.Split(string(body), "\n")
+	var sum int
 
-	for i, line := range lines {
-		fmt.Printf("%v: %v\n", i, line)
+	for _, line := range lines {
+		result := r.FindString(line)
+
+		num, err := strconv.Atoi(string(result[0]) + string(result[len(result)-1]))
+
+		logIfError(err)
+		sum += num
 	}
+
+	println(sum)
 }
