@@ -14,7 +14,7 @@ func main() {
 	var arr = make([]int, len(lines))
 	var sum int
 
-	for _, line := range lines {
+	for i, line := range lines {
 		nums := map[string]bool{}
 		var matches int
 		var mult int
@@ -27,11 +27,12 @@ func main() {
 			}
 		}
 
-		mult = arr[0]
-		arr = arr[1:]
+		mult = arr[i]
 
-		for i := 0; i < matches; i++ {
-			arr[i] = arr[i] + 1 + mult
+		for j := 0; j < matches; j++ {
+			if index := i + j + 1; index < len(lines) {
+				arr[index] = arr[index] + 1 + mult
+			}
 		}
 
 		sum += 1 + mult
