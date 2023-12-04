@@ -17,7 +17,6 @@ func main() {
 	for i, line := range lines {
 		nums := map[string]bool{}
 		var matches int
-		var mult int
 
 		for _, num := range regex.FindAllString(line, -1)[1:] {
 			if !nums[num] {
@@ -27,15 +26,13 @@ func main() {
 			}
 		}
 
-		mult = arr[i]
-
 		for j := 0; j < matches; j++ {
 			if index := i + j + 1; index < len(lines) {
-				arr[index] = arr[index] + 1 + mult
+				arr[index] = arr[index] + 1 + arr[i]
 			}
 		}
 
-		sum += 1 + mult
+		sum += 1 + arr[i]
 	}
 
 	fmt.Println(sum)
