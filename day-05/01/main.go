@@ -11,22 +11,6 @@ import (
 
 var numRegex = regexp.MustCompile(`\d+`)
 
-/*
-	STEP 2:
-	for each seed
-		run a loop from 0 to blocks length
-			mutate seed value according to a mapping function for block X:
-				split block line intro 3 numbers: destination, source and range
-				if seed is within source and source + range,
-					return Abs(destination - source) + seed and continue outer loop
-				else, try next line
-				if no line matches, return seed
-
-	STEP 3:
-	We should have a slice of location, find the lowest.
-
-*/
-
 func main() {
 	body, _ := os.ReadFile("day-05/input.txt")
 
@@ -42,14 +26,10 @@ func main() {
 		values[i] = num
 	}
 
-	// for each mapper step
 	for _, step := range mapper {
-		// transform the values according to the step mapping refs
 	Nums:
 		for j, num := range values {
 			for _, instructions := range step {
-				// if the mapping of an instruction match, mutate the value of the current seed
-				// and continue to next seed
 				if isInRange(num, instructions) {
 					if instructions[0] < instructions[1] {
 						values[j] -= int(math.Abs(float64(instructions[0] - instructions[1])))
