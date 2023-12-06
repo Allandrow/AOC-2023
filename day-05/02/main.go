@@ -36,8 +36,7 @@ func main() {
 	// iterate over each location until a match is found in seeds: this will be the lowest location possible
 Locations:
 	for {
-		location := i
-		humidity := applyMapping(location, mappers["location"])
+		humidity := applyMapping(i, mappers["location"])
 		temperature := applyMapping(humidity, mappers["humidity"])
 		light := applyMapping(temperature, mappers["temperature"])
 		water := applyMapping(light, mappers["light"])
