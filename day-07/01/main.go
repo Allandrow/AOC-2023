@@ -10,13 +10,6 @@ import (
 	"strings"
 )
 
-/*
-
-for each hand
-	sum of bets * (index + 1)
-
-*/
-
 type scoreAndBets struct {
 	score int
 	bet   int
